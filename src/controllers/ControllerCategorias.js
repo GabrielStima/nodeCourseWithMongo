@@ -20,11 +20,28 @@ module.exports = {
     },
 
     update: (request, response) => {
+        Categoria.findOne({_id:request.params.id})
+            .then((categoria) => {
+                categoria.nome = request.body.nome;
+                categoria.slug = request.body.slug;
 
+                categoria.save()
+                    .then(() => response.end())
+                    .catch((err) => response.json({error: err, message: 'Fail to update categoria' }))
+            })
+            .catch((err) => response.status(404).json({error: err, message: 'id not found' }))
     },
 
     delete: (request, response) => {
+        Categoria.findOne({_id: request.params.id})
+            .then((categoria) => {
+                Categoria.deleteOne({_id: categoria._id})
+                    .then(() => response.end())
+                    .catch((err) => response.json({error: err, message: 'fail to delete' }))
+            })
+            .catch((err) => response.status(404).json({error: err, message: 'id not found' }))
 
+        
     }
 
 }
