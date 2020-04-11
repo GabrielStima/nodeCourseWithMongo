@@ -4,20 +4,14 @@ const Category = mongoose.model("categories");
 
 module.exports = {
   create: async (request, response) => {
-    const authorization = request.headers.authorization;
-
     try {
-      if (authorization) {
-        const newCategory = {
-          name: request.body.name,
-          slug: request.body.slug,
-        };
+      const newCategory = {
+        name: request.body.name,
+        slug: request.body.slug,
+      };
 
-        const category = await new Category(newCategory).save();
-        response.status(201).json(category);
-      } else {
-        throw new Error("Not authorizate");
-      }
+      const category = await new Category(newCategory).save();
+      response.status(201).json(category);
     } catch (err) {
       response.status(400).json({ error: err.message });
     }
@@ -33,35 +27,23 @@ module.exports = {
   },
 
   update: async (request, response) => {
-    const authorization = request.headers.authorization;
-
     try {
-      if (authorization) {
-        const category = await Category.findOne({ _id: request.params.id });
+      const category = await Category.findOne({ _id: request.params.id });
 
-        category.name = request.body.name;
-        category.slug = request.body.slug;
+      category.name = request.body.name;
+      category.slug = request.body.slug;
 
-        const categoryUpdated = await category.save();
-        response.json(categoryUpdated);
-      } else {
-        throw new Error("Not authorizate");
-      }
+      const categoryUpdated = await category.save();
+      response.json(categoryUpdated);
     } catch (err) {
       response.status(400).json({ error: err.message });
     }
   },
 
   delete: async (request, response) => {
-    const authorization = request.headers.authorization;
-
     try {
-      if (authorization) {
-        await Category.deleteOne({ _id: request.params.id });
-        response.sendStatus(204);
-      } else {
-        throw new Error("Not authorizate");
-      }
+      await Category.deleteOne({ _id: request.params.id });
+      response.sendStatus(204);
     } catch (err) {
       response.status(400).json({ error: err.message });
     }
