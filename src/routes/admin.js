@@ -1,26 +1,26 @@
-const routes = require('express').Router();
-const ControllerCategories = require('../controllers/ControllerCategories');
-const ControllerPosts = require('../controllers/ControllerPosts');
-const ControllerUsers = require('../controllers/ControllerUsers');
+const routes = require("express").Router();
+const CategoriesController = require("../controllers/CategoriesController");
+const PostsController = require("../controllers/PostsController");
+const UsersController = require("../controllers/UsersController");
 
-routes.post('/categorias/add', ControllerCategories.create)
+routes.post("/categorias", CategoriesController.create);
 
-routes.put('/categorias/edit/:id', ControllerCategories.update)
+routes.put("/categorias/:id", CategoriesController.update);
 
-routes.delete('/categorias/delete/:id', ControllerCategories.delete)
+routes.delete("/categorias/:id", CategoriesController.delete);
 
-routes.post('/postagens/add', ControllerPosts.create)
+routes.post("/postagens", PostsController.create);
 
-routes.put('/postagens/edit/:id', ControllerPosts.update)
+routes.put("/postagens/:id", PostsController.update);
 
-routes.delete('/postagens/delete/:id', ControllerPosts.delete)
+routes.delete("/postagens/:id", PostsController.delete);
 
-routes.get('/usuarios/list',ControllerUsers.list)
+routes.get("/usuarios", UsersController.list);
 
-routes.post('/usuarios/add',ControllerUsers.create)
+routes.post("/usuarios", UsersController.create);
 
-routes.put('/usuarios/edit/:id',ControllerUsers.update)
+routes.put("/usuarios/:id", UsersController.update);
 
-routes.delete('/usuarios/delete/:id',ControllerUsers.delete)
+routes.delete("/usuarios/:id", UsersController.delete);
 
 module.exports = routes;

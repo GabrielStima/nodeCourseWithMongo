@@ -1,11 +1,11 @@
-const routes = require('express').Router();
-const ControllerCategories = require('../controllers/ControllerCategories');
-const ControllerPosts = require('../controllers/ControllerPosts');
+const routes = require("express").Router();
+const CategoriesController = require("../controllers/CategoriesController");
+const PostsController = require("../controllers/PostsController");
 
-routes.get('/categorias/list', ControllerCategories.list)
+routes.get("/categorias", CategoriesController.list);
 
-routes.get('/postagens/list', ControllerPosts.list)
+routes.get("/postagens", PostsController.list);
 
-routes.get('/postagens/list/:id', ControllerPosts.listByCategory)
+routes.get("/postagens/:id", PostsController.listByCategory);
 
 module.exports = routes;

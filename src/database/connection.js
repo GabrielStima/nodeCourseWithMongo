@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const adress = "localhost";
+const address = "localhost";
 const db = "blogapp";
 
 function connectMongoDB() {
     mongoose
-      .connect(`mongodb://${adress}/${db}`, {
+      .connect(`mongodb://${address}/${db}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
