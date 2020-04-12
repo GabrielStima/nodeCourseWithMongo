@@ -1,14 +1,7 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const { passwordGenerate } = require("../services/passwordGenerate");
 require("../models/User");
 const User = mongoose.model("users");
-
-function passwordGenerate(password) {
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
-
-  return hash;
-}
 
 module.exports = {
   create: async (request, response) => {

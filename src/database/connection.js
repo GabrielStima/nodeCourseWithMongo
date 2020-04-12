@@ -1,12 +1,5 @@
 const mongoose = require("mongoose");
-
-const databaseSelect = () => {
-  if (process.env.NODE_ENV === "test") {
-    return process.env.NAME_DATABASE_TEST;
-  } else {
-    return process.env.NAME_DATABASE;
-  }
-};
+const { databaseSelect } = require("../services/databaseSelect");
 
 async function connectMongoDB() {
   await mongoose

@@ -1,14 +1,7 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { comparePwd } = require("../services/comparePwd");
 require("../models/User");
 const User = mongoose.model("users");
-
-const authGenerete = (id) => {
-  return jwt.sign({ id }, process.env.SECRET, {
-    expiresIn: 300,
-  });
-};
 
 module.exports = {
   authenticate: async (request, response) => {
@@ -21,12 +14,12 @@ module.exports = {
         throw new Error("User not found");
       }
 
-      bcrypt.compare(request.body.password, user.password, (error, isEqual) => {
+      comparePwd(request.body.password, user, (isEquals, value, message) => {
         try {
-          if (isEqual) {
-            response.json({ token: authGenerete(user._id) });
+          if (isEquals) {
+            response.json(value);
           } else {
-            throw new Error("Wrong password");
+            throw new Error(message);
           }
         } catch (err) {
           response.status(400).json({ error: err.message });
