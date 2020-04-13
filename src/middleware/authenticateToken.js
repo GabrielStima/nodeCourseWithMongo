@@ -15,7 +15,6 @@ module.exports = {
           .send({ auth: false, message: "Failed to authenticate token." });
       }
       request.userId = decoded.id;
-      console.log(decoded);
       next();
     });
   },

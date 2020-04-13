@@ -8,12 +8,8 @@ describe("Password Generate", () => {
     expect(typeof generatedPassword).toBe("string");
   });
 
-  it("should be lenght equal 60", () => {
-    expect(generatedPassword.length).toEqual(60);
-  });
-
-  it("should be equal", () => {
-    bcrypt.compare(password, generatedPassword, (error, isEqual) => {
+  it("should be equal", async () => {
+    await bcrypt.compare(password, generatedPassword, (error, isEqual) => {
       expect(isEqual).toBeTruthy();
     });
   });
